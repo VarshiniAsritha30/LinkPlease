@@ -3,8 +3,8 @@ services:
     name: linkplease-backend
     env: docker
     plan: free
-    dockerContext: LinkPlease
-    dockerfilePath: LinkPlease/Dockerfile
+    dockerContext: .
+    dockerfilePath: Dockerfile
     envVars:
       - key: PSEUDOGRAM_API_BASE_URL
         value: https://pseudogram-api.onrender.com
