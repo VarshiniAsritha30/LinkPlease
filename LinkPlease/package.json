@@ -1,0 +1,8 @@
+{
+  "name": "linkplease-app",
+  "version": "1.0.0",
+  "description": "App runner for LinkPlease",
+  "scripts": {
+    "dev": ".\\venv\\Scripts\\python -m uvicorn app.main:app --reload --port 8000"
+  }
+}

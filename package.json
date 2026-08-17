@@ -1,0 +1,8 @@
+{
+  "name": "linkplease-workspace",
+  "version": "1.0.0",
+  "description": "Workspace runner for LinkPlease",
+  "scripts": {
+    "dev": "npm --prefix LinkPlease run dev"
+  }
+}

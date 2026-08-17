@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkPlease - DM Automation Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="logo-icon">✨</div>
+                <div>
+                    <h1>LinkPlease</h1>
+                    <p class="subtitle">Instagram Comment DM Automation Engine</p>
+                </div>
+            </div>
+            <div class="status-badge">
+                <span class="pulse-dot"></span> System Active
+            </div>
+        </header>
+
+        <!-- Stats Section -->
+        <section class="stats-grid">
+            <div class="stat-card sent">
+                <div class="stat-icon">✅</div>
+                <div class="stat-content">
+                    <span class="stat-label">Confirmed Sent</span>
+                    <h2 id="stat-sent">0</h2>
+                </div>
+            </div>
+            <div class="stat-card queued">
+                <div class="stat-icon">⏳</div>
+                <div class="stat-content">
+                    <span class="stat-label">Queued / Retrying</span>
+                    <h2 id="stat-queued">0</h2>
+                </div>
+            </div>
+            <div class="stat-card blocked">
+                <div class="stat-icon">🛡️</div>
+                <div class="stat-content">
+                    <span class="stat-label">Duplicates Blocked</span>
+                    <h2 id="stat-blocked">0</h2>
+                </div>
+            </div>
+            <div class="stat-card failed">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-content">
+                    <span class="stat-label">Failed Permanently</span>
+                    <h2 id="stat-failed">0</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Layout -->
+        <main class="main-layout">
+            <!-- Left Column: Rule Creation & List -->
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>Automation Rules</h2>
+                    <span class="badge" id="rule-count">0 Rules</span>
+                </div>
+                
+                <!-- Rule Creation Form -->
+                <form id="create-rule-form" class="rule-form">
+                    <h3>Create New Rule</h3>
+                    <div class="form-group">
+                        <label for="keyword">Keyword</label>
+                        <input type="text" id="keyword" placeholder="e.g. PRICE" required>
+                        <small>Case-insensitive, exact word matching</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="dm-message">DM Message</label>
+                        <textarea id="dm-message" rows="3" placeholder="e.g. Here is our full price list: https://example.com/pricing" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btn-save-rule">
+                        <span>+ Add Automation Rule</span>
+                    </button>
+                </form>
+
+                <!-- Rules List -->
+                <div class="rules-list-container">
+                    <h3>Active Rules</h3>
+                    <div id="rules-list" class="rules-list">
+                        <div class="empty-state">Loading rules...</div>
+                    </div>
+                </div>
+
+                <!-- Simulate Webhook / Test Rule Form -->
+                <form id="simulate-webhook-form" class="rule-form" style="margin-top: 1rem; border-color: var(--accent-blue);">
+                    <h3 style="color: var(--accent-blue);">Simulate Comment Webhook</h3>
+                    <div class="form-group">
+                        <label for="simulate-text">Comment Text</label>
+                        <input type="text" id="simulate-text" placeholder="e.g. What is the PRICE please?" required>
+                        <small>Include active keywords to trigger automatic DM rules</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="simulate-user">Instagram Username</label>
+                        <input type="text" id="simulate-user" placeholder="e.g. instatester" value="instatester" required>
+                    </div>
+                    <button type="submit" class="btn btn-secondary" style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); color: #fff; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);" id="btn-simulate-webhook">
+                        <span>Send Test Webhook</span>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Right Column: System Logs & Recent Activity -->
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>Live Activity & Jobs</h2>
+                    <button class="btn btn-secondary btn-sm" id="btn-refresh">🔄 Refresh Data</button>
+                </div>
+                
+                <div class="jobs-table-container">
+                    <table class="jobs-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Comment ID</th>
+                                <th>Status</th>
+                                <th>Attempts</th>
+                                <th>DM ID</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jobs-list">
+                            <tr>
+                                <td colspan="5" class="empty-state">No recent activity found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
