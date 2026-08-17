@@ -1,3 +1,7 @@
+databases:
+  - name: linkplease-db
+    plan: free
+
 services:
   - type: web
     name: linkplease-backend
@@ -10,7 +14,9 @@ services:
       - key: PSEUDOGRAM_API_KEY
         sync: false
       - key: DATABASE_URL
-        value: sqlite+aiosqlite:///./linkplease.db
+        fromDatabase:
+          name: linkplease-db
+          property: connectionString
       - key: WEBHOOK_SIGNATURE_REQUIRED
         value: "false"
       - key: MAX_DM_ATTEMPTS
